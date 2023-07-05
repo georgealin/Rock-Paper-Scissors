@@ -4,52 +4,98 @@
         <meta charset="UTF-8">
         <title>Rock Paper Scisor</title>
         <script src="../Rock-Paper-Scissors/script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="../Rock-Paper-Scissors/style.css">
     </head>
     <body>
+        <div class="buttons">
+        <button id="btn1">Rock</button>
+        <button id="btn2">Paper</button>
+        <button id="btn3">Scissors</button>
+        </div>
+        <div class="result"></div>
+
+        
+
+
         <script>
-            //Create a function for the computer choice.
-            function getComputerChoice(choices) {
-                return choices[Math.floor(Math.random() * choices.length)];    
-            };
-            //Assign values to choices variable
-            const choices = ["rock", "paper", "scissors"];
+            const btn1 = document.querySelector('#btn1');
+            btn1.addEventListener('click', function () {
+                playerSelection = "rock";
+                playRound(playerSelection)
+            });
+
+            const btn2 = document.querySelector('#btn2');
+            btn2.addEventListener('click', function () {
+                playerSelection = "paper";
+                playRound(playerSelection)
+            });
+
+            const btn3 = document.querySelector('#btn3');
+            btn3.addEventListener('click', function () {
+                playerSelection = "scissors";
+                playRound(playerSelection)
+            });
             
-            //Declare variables
-            let inputChoice;
-            let playerSelection;
-            let computerSelection;
+            
+            //Create a function for the computer choice.
+            
             let scoreWin = 0;
             let scoreLoose = 0;
+            let playerSelection;
+            function clearContent(div) {
+                document.getElementsByClassName('result').innerHTML = "";
+            }
+            //Create one round function.It has another function within for computer choice
+            function playRound(playerSelection) {
+               
+                   
+                //getComputerChoice return a random index of choices array
+                function getComputerChoice(choices) {
+                    return choices[Math.floor(Math.random() * choices.length)];    
+                };
+                //Assign values to choices variable
+                const choices = ["rock", "paper", "scissors"];
             
-            //Create one round function
-            function playRound(playerSelection,computerSelection) {
-                //Assign value to variables
-                inputChoice = prompt("Take your choice!");
-                playerSelection = inputChoice.toLowerCase();
-                computerSelection = getComputerChoice(choices);
+                let computerSelection = getComputerChoice(choices);
                 
                 if (playerSelection === computerSelection) {
+                    const div = document.createElement('div');
+                    div.textContent = "It's a tie!";
+                    $('.result').empty();
+                    document.getElementsByClassName('result')[0].appendChild(div);
                     console.log("It's a tie!");
                     return "tie";
-                } else if ((playerSelection == "rock" && computerSelection == "scissors") ||
-                (playerSelection == "paper" && computerSelection == "rock") ||
-                (playerSelection == "scissors" && computerSelection == "paper")) {
+                } else if (
+                    (playerSelection == "rock" && computerSelection == "scissors") ||
+                    (playerSelection == "paper" && computerSelection == "rock") ||
+                    (playerSelection == "scissors" && computerSelection == "paper")) {
+                    const div = document.createElement('div');
+                    div.textContent = "You win this round!";
+                    $('.result').empty();
+                    document.getElementsByClassName('result')[0].appendChild(div);
                     console.log("You win! " + playerSelection + " beats " + computerSelection + "!");
                     return "win"
-                } else if ((playerSelection == "rock" && computerSelection == "paper") ||
-                (playerSelection == "paper" && computerSelection == "scissors") ||
-                (playerSelection == "scissors" && computerSelection == "rock")) {
+                } else if (
+                    (playerSelection == "rock" && computerSelection == "paper") ||
+                    (playerSelection == "paper" && computerSelection == "scissors") ||
+                    (playerSelection == "scissors" && computerSelection == "rock")) {
+                    const div = document.createElement('div');
+                    div.textContent = "You loose this round!";
+                    $('.result').empty();
+                    document.getElementsByClassName('result')[0].appendChild(div);
                     console.log("You lose! " + computerSelection + " beats " + playerSelection + "!");
                     return "loose";
-                }
-            };
+                } 
+                };
+                
+            
             
             //create function to play 5 rounds
-            function game(playRound) {
+            /*function game(playRound) {
                 
                 for (let i = 0; i < 5; i++) { 
-                /* declare result variable to use it for counting the wins and the looses. Assign it value of playRound function */     
+                // declare result variable to use it for counting the wins and the looses. Assign it value of playRound function      
                 const result = playRound();
                 if (result === "win") {
                     scoreWin++;
@@ -66,7 +112,8 @@
                 } else if (finalScore < 0) {
                     console.log("You lose the game");
                 };
-            }
+            }*/
+        
                 /*if (scoreWin = scoreLoose) {
                 console.log("It's a tie!Play another game.");
                     } else if (scoreWin > scoreLoose) {
@@ -74,10 +121,11 @@
                     } else if (scoreWin < scoreLoose) {
                     console.log("You lose the game");
                 };
-                };*/
+                };
+            //call the game function
+            game(playRound);*/
+           
             
-            game(playRound);
-
         </script>
     </body>
 </html>
