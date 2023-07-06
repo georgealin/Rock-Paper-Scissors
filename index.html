@@ -73,7 +73,7 @@
             let ctr = 0;
             function cnt() {
                 ctr++;
-                if (ctr == 5) {
+                if (ctr % 5 == 0 ) {
                     const finalScore = scoreWin - scoreLoose;
                     if (finalScore == 0) {
                         document.getElementById('end').textContent = "It's a tie!Play another game."
