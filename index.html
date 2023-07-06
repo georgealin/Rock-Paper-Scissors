@@ -15,13 +15,14 @@
         <button id="btn2">Paper</button>
         <button id="btn3">Scissors</button>
         </div>
-        <div class="result">
+        <div id="result">
                 <div id="winsTotal"></div>
                 <div id="looseTotal"></div>
-                <div id="ties"></div>
+                <div id="ties">""</div>
             </div>
         </div>
         <div id="end"></div>
+        <button id="restartBtn">Restart Game</button>
             
 
 
@@ -30,28 +31,70 @@
             btn1.addEventListener('click', function () {
                 playerSelection = "rock";
                 playRound(playerSelection)
+                cnt();
             });
 
             const btn2 = document.querySelector('#btn2');
             btn2.addEventListener('click', function () {
                 playerSelection = "paper";
                 playRound(playerSelection)
+                cnt();
             });
 
             const btn3 = document.querySelector('#btn3');
-            btn3.addEventListener('click', function () {
+            btn3.addEventListener('click', restartGame);
+            
+            function restartGame() {
                 playerSelection = "scissors";
                 playRound(playerSelection)
+                cnt();
+            };
+            
+            const restartBtn = document.          querySelector('#restartBtn');
+            
+            restartBtn.addEventListener('click',
+            function () {
+                clearResult();
+                clearEnd();
             });
-            
-            
+                
+            function clearEnd() {
+                document.getElementById('end').innerHTML = "";
+            };
+            //document.getElementsByClassName('result').innerHTML = "";
+            //const div = document.getElementsByClassName('result');
+            //div.replaceChildren();
+            function clearResult() {
+            let div = document.getElementById("result");
+            while (div.firstChild) {
+            div.removeChild(div.firstChild);
+            }};
+
+            let ctr = 0;
+            function cnt() {
+                ctr++;
+                if (ctr == 5) {
+                    const finalScore = scoreWin - scoreLoose;
+                    if (finalScore == 0) {
+                        document.getElementById('end').textContent = "It's a tie!Play another game."
+                        console.log("It's a tie!Play another game.");
+                    } else if (finalScore > 0) {
+                        document.getElementById('end').textContent = "You win the game"
+                        console.log("You win the game");
+                    } else if (finalScore < 0) {
+                        document.getElementById('end').textContent = "You lose the game"
+                        console.log("You lose the game");
+                };
+                }
+            }
             //Create a function for the computer choice.
             
             let scoreWin = 0;
             let scoreLoose = 0;
+            let scoreTie = 0;
             let playerSelection;
             function clearContent(div) {
-                document.getElementsByClassName('result').innerHTML = "";
+                document.getElementById('result').innerHTML = "";
             }
             //Create one round function.It has another function within for computer choice
             function playRound(playerSelection) {
@@ -70,32 +113,55 @@
                     const div = document.createElement('div');
                     div.textContent = "It's a tie!";
                     $('.result').empty();
-                    document.getElementsByClassName('result')[0].appendChild(div);
-                    console.log("It's a tie!");
+                    clearResult();
+                    document.getElementById('result').appendChild(div);
+                    scoreTie++;
+                    
                     return "tie";
                 } else if (
                     (playerSelection == "rock" && computerSelection == "scissors") ||
                     (playerSelection == "paper" && computerSelection == "rock") ||
                     (playerSelection == "scissors" && computerSelection == "paper")) {
                     const div = document.createElement('div');
-                    div.textContent = "You win this round!";
+                    div.textContent = "You win this round! Your opponent choice was: " + computerSelection;
                     $('.result').empty();
-                    document.getElementsByClassName('result')[0].appendChild(div);
-                    console.log("You win! " + playerSelection + " beats " + computerSelection + "!");
+                    clearResult();
+                    document.getElementById('result').appendChild(div);
+                    scoreWin++;
                     return "win"
                 } else if (
                     (playerSelection == "rock" && computerSelection == "paper") ||
                     (playerSelection == "paper" && computerSelection == "scissors") ||
                     (playerSelection == "scissors" && computerSelection == "rock")) {
                     const div = document.createElement('div');
-                    div.textContent = "You loose this round!";
+                    div.textContent = "You loose this round! Your opponent choice was: " + computerSelection;
                     $('.result').empty();
-                    document.getElementsByClassName('result')[0].appendChild(div);
-                    console.log("You lose! " + computerSelection + " beats " + playerSelection + "!");
+                    clearResult();
+                    document.getElementById('result').appendChild(div);
+                    scoreLoose++;
                     return "loose";
                 } 
+                
                 };
                 
+                /*const resultFinal;
+                if (resultFinal === "win") {
+                    scoreWin++;
+                } else if (resultFinal === "loose") {
+                    scoreLoose++;
+                } else if (resultFinal === "tie") {
+                    scoreTie++;
+                }*/
+                
+                //verify the score and console.log the result
+                /*const finalScore = scoreWin - scoreLoose;
+                if (finalScore == 0) {
+                    console.log("It's a tie!Play another game.");
+                } else if (finalScore > 0) {
+                    console.log("You win the game");
+                } else if (finalScore < 0) {
+                    console.log("You lose the game");
+                };*/
             
             
             //create function to play 5 rounds
