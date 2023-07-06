@@ -85,6 +85,8 @@
                         document.getElementById('end').textContent = "You lose the game"
                         console.log("You lose the game");
                 };
+                clearResult();
+                
                 }
             }
             //Create a function for the computer choice.
@@ -93,9 +95,9 @@
             let scoreLoose = 0;
             let scoreTie = 0;
             let playerSelection;
-            function clearContent(div) {
+            /*function clearContent(div) {
                 document.getElementById('result').innerHTML = "";
-            }
+            }*/
             //Create one round function.It has another function within for computer choice
             function playRound(playerSelection) {
                
@@ -112,8 +114,9 @@
                 if (playerSelection === computerSelection) {
                     const div = document.createElement('div');
                     div.textContent = "It's a tie!";
-                    $('.result').empty();
+                    //$('.result').empty();
                     clearResult();
+                    clearEnd();
                     document.getElementById('result').appendChild(div);
                     scoreTie++;
                     
@@ -124,8 +127,9 @@
                     (playerSelection == "scissors" && computerSelection == "paper")) {
                     const div = document.createElement('div');
                     div.textContent = "You win this round! Your opponent choice was: " + computerSelection;
-                    $('.result').empty();
+                    //$('.result').empty();
                     clearResult();
+                    clearEnd();
                     document.getElementById('result').appendChild(div);
                     scoreWin++;
                     return "win"
@@ -135,8 +139,9 @@
                     (playerSelection == "scissors" && computerSelection == "rock")) {
                     const div = document.createElement('div');
                     div.textContent = "You loose this round! Your opponent choice was: " + computerSelection;
-                    $('.result').empty();
+                    //$('.result').empty();
                     clearResult();
+                    clearEnd();
                     document.getElementById('result').appendChild(div);
                     scoreLoose++;
                     return "loose";
