@@ -45,16 +45,22 @@ body {
     border-radius: 8px;
     border-color: red;
     border-width: 3px;
-    padding: 15px;
-    
+    padding: 15px;  
+    animation: fadeIn 5s;
 }
+ @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ }
 
 #end {
     font-size: 40px;
     font-weight: bold;
     color: red;
-    margin-bottom: -25px;
+    display: flex;
+    flex-direction: column;
 }
+
 
 #restartBtn {
     width: 250px;
@@ -67,4 +73,14 @@ body {
     font-size: 35px;
     color: white;
     margin-top: 35px;
+}
+
+.wins,
+.looses,
+.ties {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    flex-shrink: 1;
+    margin-top: 15px;
 }
