@@ -47,8 +47,11 @@
             });
 
             const btn3 = document.querySelector('#btn3');
-            btn3.addEventListener('click', restartGame);
-            
+            btn3.addEventListener('click', function () {
+                playerSelection = "scissors";
+                playRound(playerSelection)
+                cnt();
+            });
             /*create function to restart game. call clearResult fuction to delete de content for result div, call clearEnd function to delete the content for the end div,  reenable the three buttons, delete the content for winsTotal,looseTotal and ties divs. Set the scoreWins,scoreLoose,scoreTie and ctr back to zero.*/
             function restartGame() {
                 clearResult();
